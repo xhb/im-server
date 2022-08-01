@@ -17,7 +17,7 @@ import (
 	"Open_IM/pkg/utils"
 	"flag"
 	"fmt"
-	//_ "github.com/razeencheng/demo-go/swaggo-gin/docs"
+	
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"io"

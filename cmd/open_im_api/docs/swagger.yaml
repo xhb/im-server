@@ -1,128 +1,5 @@
 basePath: /
 definitions:
-  Open_IM_internal_api_manage.FileElem:
-    properties:
-      fileName:
-        type: string
-      filePath:
-        type: string
-      fileSize:
-        type: integer
-      sourceURL:
-        type: string
-      uuid:
-        type: string
-    type: object
-  Open_IM_internal_api_manage.OANotificationElem:
-    properties:
-      ex:
-        type: string
-      fileElem:
-        $ref: '#/definitions/Open_IM_internal_api_manage.FileElem'
-      mixType:
-        type: integer
-      notificationFaceURL:
-        type: string
-      notificationName:
-        type: string
-      notificationType:
-        type: integer
-      pictureElem:
-        $ref: '#/definitions/Open_IM_internal_api_manage.PictureElem'
-      soundElem:
-        $ref: '#/definitions/Open_IM_internal_api_manage.SoundElem'
-      text:
-        type: string
-      url:
-        type: string
-      videoElem:
-        $ref: '#/definitions/Open_IM_internal_api_manage.VideoElem'
-    required:
-    - notificationFaceURL
-    - notificationName
-    - notificationType
-    - text
-    type: object
-  Open_IM_internal_api_manage.PictureBaseInfo:
-    properties:
-      height:
-        type: integer
-      size:
-        type: integer
-      type:
-        type: string
-      url:
-        type: string
-      uuid:
-        type: string
-      width:
-        type: integer
-    type: object
-  Open_IM_internal_api_manage.PictureElem:
-    properties:
-      bigPicture:
-        $ref: '#/definitions/Open_IM_internal_api_manage.PictureBaseInfo'
-      snapshotPicture:
-        $ref: '#/definitions/Open_IM_internal_api_manage.PictureBaseInfo'
-      sourcePath:
-        type: string
-      sourcePicture:
-        $ref: '#/definitions/Open_IM_internal_api_manage.PictureBaseInfo'
-    type: object
-  Open_IM_internal_api_manage.RevokeElem:
-    properties:
-      revokeMsgClientID:
-        type: string
-    required:
-    - revokeMsgClientID
-    type: object
-  Open_IM_internal_api_manage.SoundElem:
-    properties:
-      dataSize:
-        type: integer
-      duration:
-        type: integer
-      soundPath:
-        type: string
-      sourceURL:
-        type: string
-      uuid:
-        type: string
-    type: object
-  Open_IM_internal_api_manage.TextElem:
-    properties:
-      text:
-        type: string
-    required:
-    - text
-    type: object
-  Open_IM_internal_api_manage.VideoElem:
-    properties:
-      duration:
-        type: integer
-      snapshotHeight:
-        type: integer
-      snapshotPath:
-        type: string
-      snapshotSize:
-        type: integer
-      snapshotURL:
-        type: string
-      snapshotUUID:
-        type: string
-      snapshotWidth:
-        type: integer
-      videoPath:
-        type: string
-      videoSize:
-        type: integer
-      videoType:
-        type: string
-      videoURL:
-        type: string
-      videoUUID:
-        type: string
-    type: object
   base_info.AccountCheckReq:
     properties:
       checkUserIDList:
@@ -1285,6 +1162,9 @@ definitions:
   base_info.GroupAddMemberInfo:
     properties:
       roleLevel:
+        enum:
+        - 1
+        - 3
         type: integer
       userID:
         type: string
@@ -1372,6 +1252,10 @@ definitions:
     properties:
       groupID:
         type: string
+      inviterUserID:
+        type: string
+      joinSource:
+        type: integer
       operationID:
         type: string
       reqMessage:
@@ -1436,11 +1320,15 @@ definitions:
     type: object
   base_info.ManagementBatchSendMsgReq:
     properties:
+      businessOperationID:
+        type: string
       contentType:
         type: integer
       groupID:
         type: string
       isOnlineOnly:
+        type: boolean
+      notOfflinePush:
         type: boolean
       offlinePushInfo:
         $ref: '#/definitions/server_api_params.OfflinePushInfo'
@@ -1468,11 +1356,15 @@ definitions:
     type: object
   base_info.ManagementSendMsgReq:
     properties:
+      businessOperationID:
+        type: string
       contentType:
         type: integer
       groupID:
         type: string
       isOnlineOnly:
+        type: boolean
+      notOfflinePush:
         type: boolean
       offlinePushInfo:
         $ref: '#/definitions/server_api_params.OfflinePushInfo'
@@ -1657,7 +1549,6 @@ definitions:
     required:
     - fromUserID
     - operationID
-    - remark
     - toUserID
     type: object
   base_info.SetFriendRemarkResp:
@@ -1689,6 +1580,8 @@ definitions:
     type: object
   base_info.SetGroupInfoReq:
     properties:
+      applyMemberFriend:
+        type: integer
       ex:
         type: string
       faceURL:
@@ -1699,6 +1592,8 @@ definitions:
         type: string
       introduction:
         type: string
+      lookMemberInfo:
+        type: integer
       needVerification:
         type: integer
       notification:
@@ -2096,7 +1991,7 @@ definitions:
       userName:
         type: string
     type: object
-  internal_api_manage.FileElem:
+  manage.FileElem:
     properties:
       fileName:
         type: string
@@ -2109,12 +2004,12 @@ definitions:
       uuid:
         type: string
     type: object
-  internal_api_manage.OANotificationElem:
+  manage.OANotificationElem:
     properties:
       ex:
         type: string
       fileElem:
-        $ref: '#/definitions/internal_api_manage.FileElem'
+        $ref: '#/definitions/manage.FileElem'
       mixType:
         type: integer
       notificationFaceURL:
@@ -2124,22 +2019,21 @@ definitions:
       notificationType:
         type: integer
       pictureElem:
-        $ref: '#/definitions/internal_api_manage.PictureElem'
+        $ref: '#/definitions/manage.PictureElem'
       soundElem:
-        $ref: '#/definitions/internal_api_manage.SoundElem'
+        $ref: '#/definitions/manage.SoundElem'
       text:
         type: string
       url:
         type: string
       videoElem:
-        $ref: '#/definitions/internal_api_manage.VideoElem'
+        $ref: '#/definitions/manage.VideoElem'
     required:
-    - notificationFaceURL
     - notificationName
     - notificationType
     - text
     type: object
-  internal_api_manage.PictureBaseInfo:
+  manage.PictureBaseInfo:
     properties:
       height:
         type: integer
@@ -2154,25 +2048,25 @@ definitions:
       width:
         type: integer
     type: object
-  internal_api_manage.PictureElem:
+  manage.PictureElem:
     properties:
       bigPicture:
-        $ref: '#/definitions/internal_api_manage.PictureBaseInfo'
+        $ref: '#/definitions/manage.PictureBaseInfo'
       snapshotPicture:
-        $ref: '#/definitions/internal_api_manage.PictureBaseInfo'
+        $ref: '#/definitions/manage.PictureBaseInfo'
       sourcePath:
         type: string
       sourcePicture:
-        $ref: '#/definitions/internal_api_manage.PictureBaseInfo'
+        $ref: '#/definitions/manage.PictureBaseInfo'
     type: object
-  internal_api_manage.RevokeElem:
+  manage.RevokeElem:
     properties:
       revokeMsgClientID:
         type: string
     required:
     - revokeMsgClientID
     type: object
-  internal_api_manage.SoundElem:
+  manage.SoundElem:
     properties:
       dataSize:
         type: integer
@@ -2185,14 +2079,14 @@ definitions:
       uuid:
         type: string
     type: object
-  internal_api_manage.TextElem:
+  manage.TextElem:
     properties:
       text:
         type: string
     required:
     - text
     type: object
-  internal_api_manage.VideoElem:
+  manage.VideoElem:
     properties:
       duration:
         type: integer
@@ -2428,6 +2322,8 @@ definitions:
     type: object
   server_api_params.GroupInfo:
     properties:
+      applyMemberFriend:
+        type: integer
       createTime:
         type: integer
       creatorUserID:
@@ -2444,11 +2340,17 @@ definitions:
         type: integer
       introduction:
         type: string
+      lookMemberInfo:
+        type: integer
       memberCount:
         type: integer
       needVerification:
         type: integer
       notification:
+        type: string
+      notificationUpdateTime:
+        type: integer
+      notificationUserID:
         type: string
       ownerUserID:
         type: string
@@ -2464,6 +2366,8 @@ definitions:
       faceURL:
         type: string
       groupID:
+        type: string
+      inviterUserID:
         type: string
       joinSource:
         type: integer
@@ -2494,6 +2398,10 @@ definitions:
         type: integer
       handleUserID:
         type: string
+      inviterUserID:
+        type: string
+      joinSource:
+        type: integer
       reqMsg:
         type: string
       reqTime:
@@ -2702,11 +2610,6 @@ paths:
       description: 用户注册
       operationId: UserRegister
       parameters:
-      - description: im token
-        in: header
-        name: token
-        required: true
-        type: string
       - description: secret为openIM密钥, 详细见服务端config.yaml secret字段 <br> platform为平台ID
           <br> ex为拓展字段 <br> gender为性别, 0为女, 1为男
         in: body
@@ -2739,11 +2642,6 @@ paths:
       description: 获取用户的token
       operationId: UserToken
       parameters:
-      - description: im token
-        in: header
-        name: token
-        required: true
-        type: string
       - description: secret为openIM密钥, 详细见服务端config.yaml secret字段 <br> platform为平台ID
         in: body
         name: req
@@ -4015,7 +3913,7 @@ paths:
           - $ref: '#/definitions/base_info.ManagementBatchSendMsgReq'
           - properties:
               content:
-                $ref: '#/definitions/Open_IM_internal_api_manage.TextElem'
+                $ref: '#/definitions/manage.TextElem'
             type: object
       - description: 该请求和消息结构体一样 <br> recvIDList为接受消息的用户ID列表
         in: body
@@ -4026,7 +3924,7 @@ paths:
           - $ref: '#/definitions/base_info.ManagementSendMsgReq'
           - properties:
               content:
-                $ref: '#/definitions/Open_IM_internal_api_manage.OANotificationElem'
+                $ref: '#/definitions/manage.OANotificationElem'
             type: object
       produces:
       - application/json
@@ -4247,7 +4145,7 @@ paths:
           - $ref: '#/definitions/base_info.ManagementSendMsgReq'
           - properties:
               content:
-                $ref: '#/definitions/Open_IM_internal_api_manage.TextElem'
+                $ref: '#/definitions/manage.TextElem'
             type: object
       - description: 该请求和消息结构体一样
         in: body
@@ -4258,7 +4156,7 @@ paths:
           - $ref: '#/definitions/base_info.ManagementSendMsgReq'
           - properties:
               content:
-                $ref: '#/definitions/Open_IM_internal_api_manage.OANotificationElem'
+                $ref: '#/definitions/manage.OANotificationElem'
             type: object
       - description: 该请求和消息结构体一样
         in: body
@@ -4269,7 +4167,7 @@ paths:
           - $ref: '#/definitions/base_info.ManagementSendMsgReq'
           - properties:
               content:
-                $ref: '#/definitions/Open_IM_internal_api_manage.RevokeElem'
+                $ref: '#/definitions/manage.RevokeElem'
             type: object
       produces:
       - application/json

@@ -156,13 +156,6 @@ const docTemplate = `{
                 "operationId": "UserRegister",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "im token",
-                        "name": "token",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
                         "description": "secret为openIM密钥, 详细见服务端config.yaml secret字段 \u003cbr\u003e platform为平台ID \u003cbr\u003e ex为拓展字段 \u003cbr\u003e gender为性别, 0为女, 1为男",
                         "name": "req",
                         "in": "body",
@@ -209,13 +202,6 @@ const docTemplate = `{
                 "summary": "用户登录",
                 "operationId": "UserToken",
                 "parameters": [
-                    {
-                        "type": "string",
-                        "description": "im token",
-                        "name": "token",
-                        "in": "header",
-                        "required": true
-                    },
                     {
                         "description": "secret为openIM密钥, 详细见服务端config.yaml secret字段 \u003cbr\u003e platform为平台ID",
                         "name": "req",
@@ -2159,7 +2145,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "content": {
-                                            "$ref": "#/definitions/Open_IM_internal_api_manage.TextElem"
+                                            "$ref": "#/definitions/manage.TextElem"
                                         }
                                     }
                                 }
@@ -2180,7 +2166,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "content": {
-                                            "$ref": "#/definitions/Open_IM_internal_api_manage.OANotificationElem"
+                                            "$ref": "#/definitions/manage.OANotificationElem"
                                         }
                                     }
                                 }
@@ -2516,7 +2502,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "content": {
-                                            "$ref": "#/definitions/Open_IM_internal_api_manage.TextElem"
+                                            "$ref": "#/definitions/manage.TextElem"
                                         }
                                     }
                                 }
@@ -2537,7 +2523,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "content": {
-                                            "$ref": "#/definitions/Open_IM_internal_api_manage.OANotificationElem"
+                                            "$ref": "#/definitions/manage.OANotificationElem"
                                         }
                                     }
                                 }
@@ -2558,7 +2544,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "content": {
-                                            "$ref": "#/definitions/Open_IM_internal_api_manage.RevokeElem"
+                                            "$ref": "#/definitions/manage.RevokeElem"
                                         }
                                     }
                                 }
@@ -4573,193 +4559,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "Open_IM_internal_api_manage.FileElem": {
-            "type": "object",
-            "properties": {
-                "fileName": {
-                    "type": "string"
-                },
-                "filePath": {
-                    "type": "string"
-                },
-                "fileSize": {
-                    "type": "integer"
-                },
-                "sourceURL": {
-                    "type": "string"
-                },
-                "uuid": {
-                    "type": "string"
-                }
-            }
-        },
-        "Open_IM_internal_api_manage.OANotificationElem": {
-            "type": "object",
-            "required": [
-                "notificationFaceURL",
-                "notificationName",
-                "notificationType",
-                "text"
-            ],
-            "properties": {
-                "ex": {
-                    "type": "string"
-                },
-                "fileElem": {
-                    "$ref": "#/definitions/Open_IM_internal_api_manage.FileElem"
-                },
-                "mixType": {
-                    "type": "integer"
-                },
-                "notificationFaceURL": {
-                    "type": "string"
-                },
-                "notificationName": {
-                    "type": "string"
-                },
-                "notificationType": {
-                    "type": "integer"
-                },
-                "pictureElem": {
-                    "$ref": "#/definitions/Open_IM_internal_api_manage.PictureElem"
-                },
-                "soundElem": {
-                    "$ref": "#/definitions/Open_IM_internal_api_manage.SoundElem"
-                },
-                "text": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                },
-                "videoElem": {
-                    "$ref": "#/definitions/Open_IM_internal_api_manage.VideoElem"
-                }
-            }
-        },
-        "Open_IM_internal_api_manage.PictureBaseInfo": {
-            "type": "object",
-            "properties": {
-                "height": {
-                    "type": "integer"
-                },
-                "size": {
-                    "type": "integer"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                },
-                "uuid": {
-                    "type": "string"
-                },
-                "width": {
-                    "type": "integer"
-                }
-            }
-        },
-        "Open_IM_internal_api_manage.PictureElem": {
-            "type": "object",
-            "properties": {
-                "bigPicture": {
-                    "$ref": "#/definitions/Open_IM_internal_api_manage.PictureBaseInfo"
-                },
-                "snapshotPicture": {
-                    "$ref": "#/definitions/Open_IM_internal_api_manage.PictureBaseInfo"
-                },
-                "sourcePath": {
-                    "type": "string"
-                },
-                "sourcePicture": {
-                    "$ref": "#/definitions/Open_IM_internal_api_manage.PictureBaseInfo"
-                }
-            }
-        },
-        "Open_IM_internal_api_manage.RevokeElem": {
-            "type": "object",
-            "required": [
-                "revokeMsgClientID"
-            ],
-            "properties": {
-                "revokeMsgClientID": {
-                    "type": "string"
-                }
-            }
-        },
-        "Open_IM_internal_api_manage.SoundElem": {
-            "type": "object",
-            "properties": {
-                "dataSize": {
-                    "type": "integer"
-                },
-                "duration": {
-                    "type": "integer"
-                },
-                "soundPath": {
-                    "type": "string"
-                },
-                "sourceURL": {
-                    "type": "string"
-                },
-                "uuid": {
-                    "type": "string"
-                }
-            }
-        },
-        "Open_IM_internal_api_manage.TextElem": {
-            "type": "object",
-            "required": [
-                "text"
-            ],
-            "properties": {
-                "text": {
-                    "type": "string"
-                }
-            }
-        },
-        "Open_IM_internal_api_manage.VideoElem": {
-            "type": "object",
-            "properties": {
-                "duration": {
-                    "type": "integer"
-                },
-                "snapshotHeight": {
-                    "type": "integer"
-                },
-                "snapshotPath": {
-                    "type": "string"
-                },
-                "snapshotSize": {
-                    "type": "integer"
-                },
-                "snapshotURL": {
-                    "type": "string"
-                },
-                "snapshotUUID": {
-                    "type": "string"
-                },
-                "snapshotWidth": {
-                    "type": "integer"
-                },
-                "videoPath": {
-                    "type": "string"
-                },
-                "videoSize": {
-                    "type": "integer"
-                },
-                "videoType": {
-                    "type": "string"
-                },
-                "videoURL": {
-                    "type": "string"
-                },
-                "videoUUID": {
-                    "type": "string"
-                }
-            }
-        },
         "base_info.AccountCheckReq": {
             "type": "object",
             "required": [
@@ -6521,7 +6320,11 @@ const docTemplate = `{
             ],
             "properties": {
                 "roleLevel": {
-                    "type": "integer"
+                    "type": "integer",
+                    "enum": [
+                        1,
+                        3
+                    ]
                 },
                 "userID": {
                     "type": "string"
@@ -6652,6 +6455,12 @@ const docTemplate = `{
                 "groupID": {
                     "type": "string"
                 },
+                "inviterUserID": {
+                    "type": "string"
+                },
+                "joinSource": {
+                    "type": "integer"
+                },
                 "operationID": {
                     "type": "string"
                 },
@@ -6751,6 +6560,9 @@ const docTemplate = `{
                 "sessionType"
             ],
             "properties": {
+                "businessOperationID": {
+                    "type": "string"
+                },
                 "contentType": {
                     "type": "integer"
                 },
@@ -6758,6 +6570,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "isOnlineOnly": {
+                    "type": "boolean"
+                },
+                "notOfflinePush": {
                     "type": "boolean"
                 },
                 "offlinePushInfo": {
@@ -6798,6 +6613,9 @@ const docTemplate = `{
                 "sessionType"
             ],
             "properties": {
+                "businessOperationID": {
+                    "type": "string"
+                },
                 "contentType": {
                     "type": "integer"
                 },
@@ -6805,6 +6623,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "isOnlineOnly": {
+                    "type": "boolean"
+                },
+                "notOfflinePush": {
                     "type": "boolean"
                 },
                 "offlinePushInfo": {
@@ -7063,7 +6884,6 @@ const docTemplate = `{
             "required": [
                 "fromUserID",
                 "operationID",
-                "remark",
                 "toUserID"
             ],
             "properties": {
@@ -7129,6 +6949,9 @@ const docTemplate = `{
                 "operationID"
             ],
             "properties": {
+                "applyMemberFriend": {
+                    "type": "integer"
+                },
                 "ex": {
                     "type": "string"
                 },
@@ -7143,6 +6966,9 @@ const docTemplate = `{
                 },
                 "introduction": {
                     "type": "string"
+                },
+                "lookMemberInfo": {
+                    "type": "integer"
                 },
                 "needVerification": {
                     "type": "integer"
@@ -7724,7 +7550,7 @@ const docTemplate = `{
                 }
             }
         },
-        "internal_api_manage.FileElem": {
+        "manage.FileElem": {
             "type": "object",
             "properties": {
                 "fileName": {
@@ -7744,10 +7570,9 @@ const docTemplate = `{
                 }
             }
         },
-        "internal_api_manage.OANotificationElem": {
+        "manage.OANotificationElem": {
             "type": "object",
             "required": [
-                "notificationFaceURL",
                 "notificationName",
                 "notificationType",
                 "text"
@@ -7757,7 +7582,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "fileElem": {
-                    "$ref": "#/definitions/internal_api_manage.FileElem"
+                    "$ref": "#/definitions/manage.FileElem"
                 },
                 "mixType": {
                     "type": "integer"
@@ -7772,10 +7597,10 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "pictureElem": {
-                    "$ref": "#/definitions/internal_api_manage.PictureElem"
+                    "$ref": "#/definitions/manage.PictureElem"
                 },
                 "soundElem": {
-                    "$ref": "#/definitions/internal_api_manage.SoundElem"
+                    "$ref": "#/definitions/manage.SoundElem"
                 },
                 "text": {
                     "type": "string"
@@ -7784,11 +7609,11 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "videoElem": {
-                    "$ref": "#/definitions/internal_api_manage.VideoElem"
+                    "$ref": "#/definitions/manage.VideoElem"
                 }
             }
         },
-        "internal_api_manage.PictureBaseInfo": {
+        "manage.PictureBaseInfo": {
             "type": "object",
             "properties": {
                 "height": {
@@ -7811,24 +7636,24 @@ const docTemplate = `{
                 }
             }
         },
-        "internal_api_manage.PictureElem": {
+        "manage.PictureElem": {
             "type": "object",
             "properties": {
                 "bigPicture": {
-                    "$ref": "#/definitions/internal_api_manage.PictureBaseInfo"
+                    "$ref": "#/definitions/manage.PictureBaseInfo"
                 },
                 "snapshotPicture": {
-                    "$ref": "#/definitions/internal_api_manage.PictureBaseInfo"
+                    "$ref": "#/definitions/manage.PictureBaseInfo"
                 },
                 "sourcePath": {
                     "type": "string"
                 },
                 "sourcePicture": {
-                    "$ref": "#/definitions/internal_api_manage.PictureBaseInfo"
+                    "$ref": "#/definitions/manage.PictureBaseInfo"
                 }
             }
         },
-        "internal_api_manage.RevokeElem": {
+        "manage.RevokeElem": {
             "type": "object",
             "required": [
                 "revokeMsgClientID"
@@ -7839,7 +7664,7 @@ const docTemplate = `{
                 }
             }
         },
-        "internal_api_manage.SoundElem": {
+        "manage.SoundElem": {
             "type": "object",
             "properties": {
                 "dataSize": {
@@ -7859,7 +7684,7 @@ const docTemplate = `{
                 }
             }
         },
-        "internal_api_manage.TextElem": {
+        "manage.TextElem": {
             "type": "object",
             "required": [
                 "text"
@@ -7870,7 +7695,7 @@ const docTemplate = `{
                 }
             }
         },
-        "internal_api_manage.VideoElem": {
+        "manage.VideoElem": {
             "type": "object",
             "properties": {
                 "duration": {
@@ -8231,6 +8056,9 @@ const docTemplate = `{
         "server_api_params.GroupInfo": {
             "type": "object",
             "properties": {
+                "applyMemberFriend": {
+                    "type": "integer"
+                },
                 "createTime": {
                     "type": "integer"
                 },
@@ -8255,6 +8083,9 @@ const docTemplate = `{
                 "introduction": {
                     "type": "string"
                 },
+                "lookMemberInfo": {
+                    "type": "integer"
+                },
                 "memberCount": {
                     "type": "integer"
                 },
@@ -8262,6 +8093,12 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "notification": {
+                    "type": "string"
+                },
+                "notificationUpdateTime": {
+                    "type": "integer"
+                },
+                "notificationUserID": {
                     "type": "string"
                 },
                 "ownerUserID": {
@@ -8285,6 +8122,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "groupID": {
+                    "type": "string"
+                },
+                "inviterUserID": {
                     "type": "string"
                 },
                 "joinSource": {
@@ -8330,6 +8170,12 @@ const docTemplate = `{
                 },
                 "handleUserID": {
                     "type": "string"
+                },
+                "inviterUserID": {
+                    "type": "string"
+                },
+                "joinSource": {
+                    "type": "integer"
                 },
                 "reqMsg": {
                     "type": "string"

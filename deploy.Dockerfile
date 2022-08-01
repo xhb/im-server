@@ -4,6 +4,8 @@ FROM golang as build
 ENV GO111MODULE=on
 ENV GOPROXY=https://goproxy.cn,direct
 
+RUN go install -v github.com/swaggo/swag/cmd/swag@latest
+
 # Set up the working directory
 WORKDIR /Open-IM-Server
 # add all files to the container

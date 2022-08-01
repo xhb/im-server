@@ -17,8 +17,13 @@ gotool:
 	go vet ./
 
 install:
+	make gen
 	make build
 	mv ${BINARY_NAME} ${BIN_DIR}
+
+gen:
+	rm -fr ./docs
+	swag init --parseVendor --parseInternal --parseDependency --parseDepth 1 -g main.go
 
 clean:
 	@if [ -f ${BINARY_NAME} ] ; then rm ${BINARY_NAME} ; fi
